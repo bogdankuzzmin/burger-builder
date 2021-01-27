@@ -11,6 +11,8 @@ const controls = [
 ];
 
 const buildControls = (props) => {
+  const disabledClearButton = Object.values(props.disabled).every((element) => element === true);
+
   return (
     <div className={classes.BuildControls}>
       <p>Current price: <strong>{props.price.toFixed(2)}</strong></p>
@@ -22,7 +24,13 @@ const buildControls = (props) => {
                   removed={() => props.ingredientRemoved(control.type)}
                   disabled={props.disabled[control.type]} />
       })}
-      <button onClick={props.ingredientCleared}>Clear</button>
+      <button
+        className={classes.ClearButton}
+        onClick={props.ingredientCleared}
+        disabled={disabledClearButton}>Clear</button>
+      <button
+        className={classes.OrderButton}
+        disabled={!props.purchasable}>ORDER NOW</button>
     </div>
   );
 };
