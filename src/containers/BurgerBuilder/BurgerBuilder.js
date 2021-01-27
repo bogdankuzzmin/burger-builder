@@ -69,7 +69,8 @@ class BurgerBuilder extends Component {
         bacon: 0,
         cheese: 0,
         meat: 0,
-      }
+      },
+      totalPrice: 4,
     });
   };
 
@@ -89,7 +90,8 @@ class BurgerBuilder extends Component {
           ingredientAdded={this.addIngredientHandler}
           ingredientRemoved={this.removeIngredientHandler}
           ingredientCleared={this.clearIngredientHandler}
-          disabled={disabledInfo} />
+          disabled={disabledInfo}
+          price={this.state.totalPrice} />
       </Fragment>
     );
   }
