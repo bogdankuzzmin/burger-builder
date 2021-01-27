@@ -14,8 +14,14 @@ const buildControls = (props) => {
   return (
     <div className={classes.BuildControls}>
       {controls.map((control) => {
-        return <BuildControl key={control.label} label={control.label }/>
+        return <BuildControl
+                  key={control.label}
+                  label={control.label}
+                  added={() => props.ingredientAdded(control.type)}
+                  removed={() => props.ingredientRemoved(control.type)}
+                  disabled={props.disabled[control.type]} />
       })}
+      <button onClick={props.ingredientCleared}>Clear</button>
     </div>
   );
 };
