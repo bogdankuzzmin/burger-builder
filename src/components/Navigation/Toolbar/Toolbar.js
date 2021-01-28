@@ -8,7 +8,7 @@ const toolbar = (props) => {
   return (
     <header className={classes.Toolbar}>
       <div>MENU</div>
-      <BurgerLogo />
+      <BurgerLogo height="80%" />
       <nav>
         <NavigationItems />
       </nav>
