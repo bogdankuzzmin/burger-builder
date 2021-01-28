@@ -97,15 +97,16 @@ class BurgerBuilder extends Component {
     });
   };
 
-  purchasingHandler = () => {
+  purchaseHandler = () => {
     this.setState({purchasing: true});
   };
 
-  purchasingCancelHandler = (event) => {
-    if (event.key === 'Escape') {
-      console.log('exc');
-    }
+  purchaseCancelHandler = () => {
     this.setState({purchasing: false});
+  };
+
+  purchaseContinueHandler = () => {
+    alert('You can continue adding ingredients');
   };
 
   render() {
@@ -119,8 +120,12 @@ class BurgerBuilder extends Component {
 
     return (
       <Fragment>
-        <Modal show={this.state.purchasing} closeModal={this.purchasingCancelHandler}>
-          <OrderSummary ingredients={this.state.ingredients} />
+        <Modal show={this.state.purchasing} closeModal={this.purchaseCancelHandler}>
+          <OrderSummary
+            ingredients={this.state.ingredients}
+            purchaseCancelled={this.purchaseCancelHandler}
+            purchaseContinued={this.purchaseContinueHandler}
+            />
         </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildControls
@@ -130,7 +135,7 @@ class BurgerBuilder extends Component {
           disabled={disabledInfo}
           price={this.state.totalPrice}
           purchasable={this.state.purchasable}
-          ordered={this.purchasingHandler} />
+          ordered={this.purchaseHandler} />
       </Fragment>
     );
   }
