@@ -10,7 +10,7 @@
   top: 30%;
   box-sizing: border-box;
   transition: all 0.3s ease-out;
-  transform: translatey(-100vh);
+  transform: translatey(-120vh);
   opacity: 0;
 }
 
