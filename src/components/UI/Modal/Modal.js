@@ -15,7 +15,7 @@ const modal = (props) => {
       <div className={modalClass.join(' ')}>
         {props.children}
       </div>
-      <Backdrop show={props.show} closeModal={props.closeModal} />
+      <Backdrop show={props.show} clicked={props.closeModal} />
     </Fragment>
 
   );
