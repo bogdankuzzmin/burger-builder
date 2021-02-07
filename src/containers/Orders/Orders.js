@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from '../../axious-orders';
 
 import withErrorHandler from '../../hoc/withErrorHandler';
+import Spinner from '../../components/UI/Spinner';
 import Order from '../../components/Order';
 
 class Orders extends Component {
@@ -30,6 +31,10 @@ class Orders extends Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return <Spinner />
+    }
+
     return (
       <div>
         {this.state.orders.map(order => (
