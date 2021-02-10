@@ -10,17 +10,22 @@ const input = (props) => {
     inputClasses.push(classes.Invalid);
   }
 
+  let validationError = null;
+  if (props.invalid && props.touched) {
+    validationError = <p style={{color: 'red', fontWeight: 'bold', order: '3', marginBottom: '0'}}>Please enter a valid value!</p>;
+  }
+
   switch (props.elementType) {
     case ('input'):
-      inputElement = <input className={inputClasses.join(' ')} {...props.elementConfig} value={props.value} onChange={props.changed} />;
+      inputElement = <input className={inputClasses.join(' ')} {...props.elementConfig} value={props.value} onChange={props.changed} required={props.required}/>;
       break;
     case ('textarea'):
-      inputElement = <textarea className={inputClasses} {...props.elementConfig} value={props.value} onChange={props.changed} />;
+      inputElement = <textarea className={inputClasses.join(' ')} {...props.elementConfig} value={props.value} onChange={props.changed} />;
       break;
     case ('select'):
       inputElement = (
         <select
-          className={inputClasses}
+          className={inputClasses.join(' ')}
           value={props.value}
           onChange={props.changed}>
           {props.elementConfig.options.map(option => (
@@ -30,13 +35,14 @@ const input = (props) => {
       );
       break;
     default:
-      inputElement = <input className={inputClasses} {...props.elementConfig} value={props.value} onChange={props.changed} />;
+      inputElement = <input className={inputClasses.join(' ')} {...props.elementConfig} value={props.value} onChange={props.changed} />;
   }
 
   return (
     <div className={classes.Input}>
-      <label className={classes.Label}>{props.label}</label>
       {inputElement}
+      <label className={classes.Label}>{props.label}</label>
+      {validationError}
     </div>
   );
 };

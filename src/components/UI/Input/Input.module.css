@@ -1,16 +1,20 @@
 .Input {
+  display: flex;
+  flex-direction: column;
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
 }
 
 .Label {
+  position: relative;
   display: block;
   margin: 8px;
   font-weight: bold;
 }
 
 .InputElement {
+  order: 1;
   display: block;
   padding: 6px 10px;
   width: 100%;
@@ -19,6 +23,13 @@
   border: 1px solid #ccc;
   box-sizing: border-box;
   outline: none;
+}
+.InputElement:required + .Label:before {
+  content: '*';
+  position: absolute;
+  top: 16px;
+  right: 10px;
+  font-size: 18px;
 }
 
 .InputElement:focus {
