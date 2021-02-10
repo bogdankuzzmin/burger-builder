@@ -12,14 +12,20 @@ const sideDrawer = (props) => {
     attachedClasses = [classes.SideDrawer, classes.Open];
   }
 
+  const sideDrawerClickCloseHandler = (event) => {
+    if (event.target.closest('a')) {
+      props.closed();
+    }
+  };
+
   return (
     <Fragment>
-      <div className={attachedClasses.join(' ')}>
+      <div className={attachedClasses.join(' ')} onClick={sideDrawerClickCloseHandler}>
         <div className={classes.Logo}>
           <BurgerLogo />
         </div>
         <nav>
-          <NavigationItems />
+          <NavigationItems show={props.open} clicked={props.closed} />
         </nav>
       </div>
 
