@@ -29,6 +29,7 @@ class BurgerBuilder extends Component {
     axios.get('https://burger-builder-df1f2-default-rtdb.firebaseio.com/ingredients.json')
       .then((response) => {
         this.setState({ingredients: response.data});
+        this.updatePriceAndPurchaseState();
       })
       .catch((error) => {
         this.setState({error: true});
@@ -36,6 +37,7 @@ class BurgerBuilder extends Component {
   }
 
   updatePurchaseState = (ingredients) => {
+    console.log(ingredients);
     const sum = Object.keys(ingredients)
       .map((igKey) => {
         return ingredients[igKey];
@@ -46,6 +48,19 @@ class BurgerBuilder extends Component {
 
     this.setState({purchasable: sum});
   };
+
+  updatePriceAndPurchaseState= () => {
+    const oldIngState = {...this.state.ingredients};
+    let updatedTotalPrice = 4;
+
+    for (let key in oldIngState) {
+      updatedTotalPrice = updatedTotalPrice + (INGREDIENT_PRICES[key] * oldIngState[key]);
+    }
+
+    this.setState({totalPrice: updatedTotalPrice});
+
+    this.updatePurchaseState(this.state.ingredients);
+  }
 
   addIngredientHandler = (type) => {
     const oldIngredient = this.state.ingredients[type];
@@ -63,6 +78,7 @@ class BurgerBuilder extends Component {
       ingredients: updateIngredients,
       totalPrice: newPrice,
     });
+
     this.updatePurchaseState(updateIngredients);
   };
 
