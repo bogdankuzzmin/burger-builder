@@ -13,7 +13,6 @@ import withErrorHandler from '../../hoc/withErrorHandler';
 
 class BurgerBuilder extends Component {
   state = {
-    purchasable: false,
     purchasing: false,
     loading: false,
     error: false,
@@ -24,7 +23,6 @@ class BurgerBuilder extends Component {
     // axios.get('https://burger-builder-df1f2-default-rtdb.firebaseio.com/ingredients.json')
     //   .then((response) => {
     //     this.setState({ingredients: response.data});
-    //     this.updatePriceAndPurchaseState();
     //   })
     //   .catch((error) => {
     //     this.setState({error: true});
@@ -40,33 +38,7 @@ class BurgerBuilder extends Component {
         return sum + el;
       }, 0);
 
-    this.setState({purchasable: sum});
-  };
-
-  // updatePriceAndPurchaseState= () => {
-  //   const oldIngState = {...this.state.ingredients};
-  //   let updatedTotalPrice = 4;
-  //
-  //   for (let key in oldIngState) {
-  //     updatedTotalPrice = updatedTotalPrice + (INGREDIENT_PRICES[key] * oldIngState[key]);
-  //   }
-  //
-  //   this.setState({totalPrice: updatedTotalPrice});
-  //
-  //   this.updatePurchaseState(this.state.ingredients);
-  // }
-
-  clearIngredientHandler = () => {
-    this.setState({
-      ingredients: {
-        salad: 0,
-        bacon: 0,
-        cheese: 0,
-        meat: 0,
-      },
-      totalPrice: 4,
-      purchasable: false,
-    });
+    return sum > 0;
   };
 
   purchaseHandler = () => {
@@ -92,6 +64,7 @@ class BurgerBuilder extends Component {
   };
 
   render() {
+    console.log(this.props.ingredients);
     const disabledInfo = {
       ...this.props.ingredients
     };
@@ -111,10 +84,10 @@ class BurgerBuilder extends Component {
           <BuildControls
             ingredientAdded={this.props.addIngredientHandler}
             ingredientRemoved={this.props.removeIngredientHandler}
-            ingredientCleared={this.clearIngredientHandler}
+            ingredientCleared={this.props.clearIngredientsHandler}
             disabled={disabledInfo}
             price={this.props.totalPrice}
-            purchasable={this.state.purchasable}
+            purchasable={this.updatePurchaseState(this.props.ingredients)}
             ordered={this.purchaseHandler} />
         </Fragment>
       )
@@ -152,6 +125,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addIngredientHandler: (igName) => dispatch({type: actionType.ADD_INGREDIENT, ingredientName: igName}),
     removeIngredientHandler: (igName) => dispatch({type: actionType.REMOVE_INGREDIENT, ingredientName: igName}),
+    clearIngredientsHandler: () => dispatch({type: actionType.CLEAR_INGREDIENTS}),
   }
 };
 
