@@ -1,7 +1,7 @@
-import actionType from './actions';
-import reducer from './reducer';
+import actionType from './actions/actionTypes';
+import burgerBuilder from './reducers/burgerBuilder';
 
 export {
   actionType,
-  reducer,
+  burgerBuilder,
 }
