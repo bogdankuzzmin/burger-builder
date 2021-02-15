@@ -5,10 +5,10 @@ import {createStore} from 'redux';
 import {BrowserRouter} from 'react-router-dom';
 
 import './index.css';
-import {burgerBuilder} from './store';
+import burgerBuilderReducer from './store/reducers/burgerBuilder';
 import App from './App';
 
-const store = createStore(burgerBuilder, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(burgerBuilderReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
   <Provider store={store}>

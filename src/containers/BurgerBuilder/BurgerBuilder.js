@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import axios from '../../axious-orders';
 import {connect} from 'react-redux';
 
-import {actionType} from '../../store';
+import {addIngredient, removeIngredient} from '../../store/actions';
 
 import Burger from '../../components/Burger';
 import BuildControls from '../../components/Burger/BuildControls/';
@@ -10,6 +10,7 @@ import Modal from '../../components/UI/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary';
 import Spinner from '../../components/UI/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler';
+import {clearIngredient} from '../../store/actions/burgerBuilder';
 
 class BurgerBuilder extends Component {
   state = {
@@ -113,9 +114,9 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addIngredientHandler: (igName) => dispatch({type: actionType.ADD_INGREDIENT, ingredientName: igName}),
-    removeIngredientHandler: (igName) => dispatch({type: actionType.REMOVE_INGREDIENT, ingredientName: igName}),
-    clearIngredientsHandler: () => dispatch({type: actionType.CLEAR_INGREDIENTS}),
+    addIngredientHandler: (igName) => dispatch(addIngredient(igName)),
+    removeIngredientHandler: (igName) => dispatch(removeIngredient(igName)),
+    clearIngredientsHandler: () => dispatch(clearIngredient()),
   }
 };
 
