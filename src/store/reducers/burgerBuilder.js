@@ -1,13 +1,9 @@
 import {actionType} from '../actions';
 
 const initialState = {
-  ingredients: {
-    salad: 0,
-    bacon: 0,
-    cheese: 0,
-    meat: 0,
-  },
+  ingredients: null,
   totalPrice: 4,
+  error: false,
 };
 
 const INGREDIENT_PRICES = {
@@ -40,7 +36,33 @@ const burgerBuilder = (state = initialState, action) => {
       };
 
     case actionType.CLEAR_INGREDIENTS:
-      return state = initialState;
+      return {
+        ...state,
+        ingredients: {
+          salad: 0,
+          bacon: 0,
+          cheese: 0,
+          meat: 0,
+        },
+      }
+
+    case actionType.SET_INGREDIENTS:
+      return {
+        ...state,
+        ingredients: {
+          salad: action.ingredients.salad,
+          meat: action.ingredients.meat,
+          bacon: action.ingredients.bacon,
+          cheese: action.ingredients.cheese,
+        },
+        error: false,
+      };
+
+    case actionType.FETCH_INGREDIENTS_FAILED:
+      return {
+        ...state,
+        error: true,
+      }
 
     default:
       return state;
