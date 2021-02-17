@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import axios from '../../../axious-orders';
+import withErrorHandler from '../../../hoc/withErrorHandler';
 
 import classes from './ContactData.module.css';
 import Button from '../../../components/UI/Button';
 import Spinner from '../../../components/UI/Spinner';
 import Input from '../../../components/UI/Input';
+
+import * as actions from '../../../store/actions';
 
 class ContactData extends Component {
   state  = {
@@ -91,12 +94,10 @@ class ContactData extends Component {
       },
     },
     formIsValid: false,
-    loading: false,
-  }
+  };
 
   orderHandler = (evt) => {
     evt.preventDefault();
-    this.setState({loading: true});
 
     const formData = {};
     for (let formElementIdentifier in this.state.orderForm) {
@@ -109,14 +110,7 @@ class ContactData extends Component {
       orderData: formData,
     };
 
-    axios.post('/orders.json', order)
-      .then((response) => {
-        this.setState({loading: false});
-        this.props.history.push('/');
-      })
-      .catch((error) => {
-        this.setState({loading: false});
-      });
+    this.props.orderBurgerHandler(order);
   }
 
   checkValidity(value, rules) {
@@ -181,7 +175,7 @@ class ContactData extends Component {
       </form>
     );
 
-    if (this.state.loading) {
+    if (this.props.loading) {
       form = <Spinner />;
     }
 
@@ -194,11 +188,18 @@ class ContactData extends Component {
   }
 }
 
-const mapStateToProps = (store) => {
+const mapStateToProps = (state) => {
   return {
-    ingredients: store.ingredients,
-    price: store.totalPrice,
+    ingredients: state.ingredients,
+    price: state.totalPrice,
+    loading: state.loading,
   };
 };
 
-export default connect(mapStateToProps)(ContactData);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    orderBurgerHandler: (orderData) => dispatch(actions.purchaseBurger(orderData)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));
