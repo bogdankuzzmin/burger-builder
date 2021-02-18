@@ -55,6 +55,7 @@ const burgerBuilder = (state = initialState, action) => {
           bacon: action.ingredients.bacon,
           cheese: action.ingredients.cheese,
         },
+        totalPrice: 4,
         error: false,
       };
 

@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import axios from '../../axious-orders';
 
-import {addIngredient, removeIngredient, clearIngredient, initIngredients} from '../../store/actions';
+import {addIngredient, removeIngredient, clearIngredient, initIngredients, purchaseInit} from '../../store/actions';
 
 import Burger from '../../components/Burger';
 import BuildControls from '../../components/Burger/BuildControls/';
@@ -42,6 +42,7 @@ class BurgerBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
+    this.props.initPurchaseHandler();
     this.props.history.push('/checkout');
   };
 
@@ -93,9 +94,9 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ingredients: state.ingredients,
-    totalPrice: state.totalPrice,
-    error: state.error,
+    ingredients: state.burgerBuilder.ingredients,
+    totalPrice: state.burgerBuilder.totalPrice,
+    error: state.burgerBuilder.error,
   };
 };
 
@@ -105,6 +106,7 @@ const mapDispatchToProps = (dispatch) => {
     removeIngredientHandler: (igName) => dispatch(removeIngredient(igName)),
     clearIngredientsHandler: () => dispatch(clearIngredient()),
     initIngredientsHandler: () => dispatch(initIngredients()),
+    initPurchaseHandler: () => dispatch(purchaseInit()),
   }
 };
 
