@@ -104,7 +104,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addIngredientHandler: (igName) => dispatch(addIngredient(igName)),
     removeIngredientHandler: (igName) => dispatch(removeIngredient(igName)),
-    clearIngredientsHandler: () => dispatch(clearIngredient()),
+    clearIngredientsHandler: () => dispatch(initIngredients()),
     initIngredientsHandler: () => dispatch(initIngredients()),
     initPurchaseHandler: () => dispatch(purchaseInit()),
   }
