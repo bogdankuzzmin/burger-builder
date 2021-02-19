@@ -5,7 +5,7 @@ import Layout from './hoc/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder';
 import Checkout from './containers/Checkout';
 import Orders from './containers/Orders';
-import Auth from './containers/Auth/Auth';
+import Auth from './containers/Auth';
 
 class App extends Component {
   render() {
