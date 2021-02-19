@@ -8,6 +8,7 @@ import {BrowserRouter} from 'react-router-dom';
 import './index.css';
 import burgerBuilderReducer from './store/reducers/burgerBuilder';
 import orderReducer from './store/reducers/order';
+import authReducer from './store/reducers/auth';
 import App from './App';
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
@@ -15,6 +16,7 @@ const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOO
 const rootReducer = combineReducers({
   burgerBuilder: burgerBuilderReducer,
   order: orderReducer,
+  auth: authReducer,
 });
 
 const store = createStore(rootReducer, composeEnhancers(
@@ -24,7 +26,7 @@ const store = createStore(rootReducer, composeEnhancers(
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <BrowserRouter basename="/burger">
+      <BrowserRouter>
         <App />
       </BrowserRouter>
     </React.StrictMode>
