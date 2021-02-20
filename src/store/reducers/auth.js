@@ -2,22 +2,30 @@ import {actionType} from '../actions';
 import {updateObject} from '../utility';
 
 const initialState = {
+  token: null,
+  userId: null,
   loading: false,
-  error: false,
+  error: null,
 };
 
 const authStart = (state) => {
-  return updateObject(state, {loading: true});
+  return updateObject(state, {error: null, loading: true});
 };
 
 const authSuccess = (state, action) => {
-  console.log(action.authData);
-  return updateObject(state, {loading: false, authData: action.authData});
+  return updateObject(state, {
+    token: action.idToken,
+    userId: action.userId,
+    loading: false,
+    error: null,
+  });
 };
 
 const authFail = (state, action) => {
-  console.log(action);
-  return updateObject(state, {loading: false, error: action.error});
+  return updateObject(state, {
+    loading: false,
+    error: action.error,
+  });
 };
 
 const reducer = (state = initialState, action) => {
