@@ -2,7 +2,14 @@ import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import axios from '../../axious-orders';
 
-import {addIngredient, removeIngredient, clearIngredient, initIngredients, purchaseInit} from '../../store/actions';
+import {
+  addIngredient,
+  removeIngredient,
+  clearIngredient,
+  initIngredients,
+  purchaseInit,
+  setAuthRedirectPath
+} from '../../store/actions';
 
 import Burger from '../../components/Burger';
 import BuildControls from '../../components/Burger/BuildControls/';
@@ -33,11 +40,12 @@ class BurgerBuilder extends Component {
   };
 
   purchaseHandler = () => {
-    if (!this.props.isAuthenticated) {
-      return this.props.history.push('/auth');
+    if (this.props.isAuthenticated) {
+      this.setState({purchasing: true});
+    } else {
+      this.props.setAuthRedirectHandler('/checkout');
+      this.props.history.push('/auth');
     }
-
-    this.setState({purchasing: true});
   };
 
   purchaseCancelHandler = () => {
@@ -112,6 +120,7 @@ const mapDispatchToProps = (dispatch) => {
     clearIngredientsHandler: () => dispatch(initIngredients()),
     initIngredientsHandler: () => dispatch(initIngredients()),
     initPurchaseHandler: () => dispatch(purchaseInit()),
+    setAuthRedirectHandler: (path) => dispatch(setAuthRedirectPath(path)),
   }
 };
 
