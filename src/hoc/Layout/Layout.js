@@ -21,7 +21,6 @@ class Layout extends Component {
   }
 
   render() {
-    console.log(this.props.isAuthenticated);
     return (
       <Fragment>
           <Toolbar
