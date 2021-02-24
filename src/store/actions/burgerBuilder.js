@@ -15,12 +15,6 @@ export const removeIngredient = (name) => {
   };
 };
 
-export const clearIngredient = () => {
-  return {
-    type: actionType.CLEAR_INGREDIENTS,
-  };
-};
-
 export const setIngredients = (ingredients) => {
   return {
     type: actionType.SET_INGREDIENTS,

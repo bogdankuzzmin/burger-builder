@@ -5,7 +5,6 @@ import axios from '../../axious-orders';
 import {
   addIngredient,
   removeIngredient,
-  clearIngredient,
   initIngredients,
   purchaseInit,
   setAuthRedirectPath
