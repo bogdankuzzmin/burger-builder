@@ -75,7 +75,7 @@ class ContactData extends Component {
           type: 'email',
           placeholder: 'Your E-mail',
         },
-        value: '',
+        value: this.props.userEmail ? this.props.userEmail : '',
         validation: {
           required: true,
           isEmail: true,
@@ -183,6 +183,7 @@ const mapStateToProps = (state) => {
     loading: state.order.loading,
     token: state.auth.token,
     userId: state.auth.userId,
+    userEmail: state.auth.userEmail,
   };
 };
 
