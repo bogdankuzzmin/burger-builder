@@ -12,7 +12,6 @@ import * as actions from '../../../store/actions';
 import {updateObject, checkValidity} from '../../../shared/utility';
 
 const ContactData = (props) => {
-  console.log(props);
   const [orderForm, setOrderForm] = useState({
     name: {
       elementType: 'input',
