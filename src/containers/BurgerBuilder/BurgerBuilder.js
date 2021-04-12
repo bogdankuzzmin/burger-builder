@@ -20,9 +20,11 @@ import withErrorHandler from '../../hoc/withErrorHandler';
 const BurgerBuilder = (props) => {
   const [purchasing, setPurchasing] = useState(false);
 
+  const {initIngredientsHandler} = props;
+
   useEffect(() => {
-    props.initIngredientsHandler();
-  }, []);
+    initIngredientsHandler();
+  }, [initIngredientsHandler]);
 
   const updatePurchaseState = (ingredients) => {
     const sum = Object.keys(ingredients)
