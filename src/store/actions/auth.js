@@ -49,10 +49,10 @@ export const auth = (email, password, isSignup) => {
       password: password,
       returnSecureToken: true,
     };
-    let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBWwvsZ87hlXGw2XDSpWUHQqswpu_yN7DY';
+    let url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.FIREBASE_API_TOKEN}`;
 
     if (!isSignup) {
-      url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBWwvsZ87hlXGw2XDSpWUHQqswpu_yN7DY';
+      url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.FIREBASE_API_TOKEN}`;
     }
     axios.post(url, authData)
       .then((response) => {
